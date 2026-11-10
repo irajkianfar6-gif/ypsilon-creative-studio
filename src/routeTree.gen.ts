@@ -10,33 +10,178 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedBillRouteImport } from './routes/_authenticated/bill'
+import { Route as AuthenticatedChannelsRouteImport } from './routes/_authenticated/channels'
+import { Route as AuthenticatedDesignRouteImport } from './routes/_authenticated/design'
+import { Route as AuthenticatedFinancingRouteImport } from './routes/_authenticated/financing'
+import { Route as AuthenticatedHomeRouteImport } from './routes/_authenticated/home'
+import { Route as AuthenticatedOptimizeRouteImport } from './routes/_authenticated/optimize'
+import { Route as AuthenticatedPlantRouteImport } from './routes/_authenticated/plant'
+import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
+import { Route as AuthenticatedQuotesRouteImport } from './routes/_authenticated/quotes'
+import { Route as AuthenticatedRevenueRouteImport } from './routes/_authenticated/revenue'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedBillRoute = AuthenticatedBillRouteImport.update({
+  id: '/bill',
+  path: '/bill',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedChannelsRoute = AuthenticatedChannelsRouteImport.update({
+  id: '/channels',
+  path: '/channels',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedDesignRoute = AuthenticatedDesignRouteImport.update({
+  id: '/design',
+  path: '/design',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedFinancingRoute = AuthenticatedFinancingRouteImport.update({
+  id: '/financing',
+  path: '/financing',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedHomeRoute = AuthenticatedHomeRouteImport.update({
+  id: '/home',
+  path: '/home',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedOptimizeRoute = AuthenticatedOptimizeRouteImport.update({
+  id: '/optimize',
+  path: '/optimize',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedPlantRoute = AuthenticatedPlantRouteImport.update({
+  id: '/plant',
+  path: '/plant',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedQuotesRoute = AuthenticatedQuotesRouteImport.update({
+  id: '/quotes',
+  path: '/quotes',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedRevenueRoute = AuthenticatedRevenueRouteImport.update({
+  id: '/revenue',
+  path: '/revenue',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/bill': typeof AuthenticatedBillRoute
+  '/channels': typeof AuthenticatedChannelsRoute
+  '/design': typeof AuthenticatedDesignRoute
+  '/financing': typeof AuthenticatedFinancingRoute
+  '/home': typeof AuthenticatedHomeRoute
+  '/optimize': typeof AuthenticatedOptimizeRoute
+  '/plant': typeof AuthenticatedPlantRoute
+  '/profile': typeof AuthenticatedProfileRoute
+  '/quotes': typeof AuthenticatedQuotesRoute
+  '/revenue': typeof AuthenticatedRevenueRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/bill': typeof AuthenticatedBillRoute
+  '/channels': typeof AuthenticatedChannelsRoute
+  '/design': typeof AuthenticatedDesignRoute
+  '/financing': typeof AuthenticatedFinancingRoute
+  '/home': typeof AuthenticatedHomeRoute
+  '/optimize': typeof AuthenticatedOptimizeRoute
+  '/plant': typeof AuthenticatedPlantRoute
+  '/profile': typeof AuthenticatedProfileRoute
+  '/quotes': typeof AuthenticatedQuotesRoute
+  '/revenue': typeof AuthenticatedRevenueRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/_authenticated/bill': typeof AuthenticatedBillRoute
+  '/_authenticated/channels': typeof AuthenticatedChannelsRoute
+  '/_authenticated/design': typeof AuthenticatedDesignRoute
+  '/_authenticated/financing': typeof AuthenticatedFinancingRoute
+  '/_authenticated/home': typeof AuthenticatedHomeRoute
+  '/_authenticated/optimize': typeof AuthenticatedOptimizeRoute
+  '/_authenticated/plant': typeof AuthenticatedPlantRoute
+  '/_authenticated/profile': typeof AuthenticatedProfileRoute
+  '/_authenticated/quotes': typeof AuthenticatedQuotesRoute
+  '/_authenticated/revenue': typeof AuthenticatedRevenueRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/bill'
+    | '/channels'
+    | '/design'
+    | '/financing'
+    | '/home'
+    | '/optimize'
+    | '/plant'
+    | '/profile'
+    | '/quotes'
+    | '/revenue'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/bill'
+    | '/channels'
+    | '/design'
+    | '/financing'
+    | '/home'
+    | '/optimize'
+    | '/plant'
+    | '/profile'
+    | '/quotes'
+    | '/revenue'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/_authenticated/bill'
+    | '/_authenticated/channels'
+    | '/_authenticated/design'
+    | '/_authenticated/financing'
+    | '/_authenticated/home'
+    | '/_authenticated/optimize'
+    | '/_authenticated/plant'
+    | '/_authenticated/profile'
+    | '/_authenticated/quotes'
+    | '/_authenticated/revenue'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +193,126 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/bill': {
+      id: '/_authenticated/bill'
+      path: '/bill'
+      fullPath: '/bill'
+      preLoaderRoute: typeof AuthenticatedBillRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/channels': {
+      id: '/_authenticated/channels'
+      path: '/channels'
+      fullPath: '/channels'
+      preLoaderRoute: typeof AuthenticatedChannelsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/design': {
+      id: '/_authenticated/design'
+      path: '/design'
+      fullPath: '/design'
+      preLoaderRoute: typeof AuthenticatedDesignRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/financing': {
+      id: '/_authenticated/financing'
+      path: '/financing'
+      fullPath: '/financing'
+      preLoaderRoute: typeof AuthenticatedFinancingRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/home': {
+      id: '/_authenticated/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof AuthenticatedHomeRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/optimize': {
+      id: '/_authenticated/optimize'
+      path: '/optimize'
+      fullPath: '/optimize'
+      preLoaderRoute: typeof AuthenticatedOptimizeRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/plant': {
+      id: '/_authenticated/plant'
+      path: '/plant'
+      fullPath: '/plant'
+      preLoaderRoute: typeof AuthenticatedPlantRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/profile': {
+      id: '/_authenticated/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AuthenticatedProfileRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/quotes': {
+      id: '/_authenticated/quotes'
+      path: '/quotes'
+      fullPath: '/quotes'
+      preLoaderRoute: typeof AuthenticatedQuotesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/revenue': {
+      id: '/_authenticated/revenue'
+      path: '/revenue'
+      fullPath: '/revenue'
+      preLoaderRoute: typeof AuthenticatedRevenueRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedBillRoute: typeof AuthenticatedBillRoute
+  AuthenticatedChannelsRoute: typeof AuthenticatedChannelsRoute
+  AuthenticatedDesignRoute: typeof AuthenticatedDesignRoute
+  AuthenticatedFinancingRoute: typeof AuthenticatedFinancingRoute
+  AuthenticatedHomeRoute: typeof AuthenticatedHomeRoute
+  AuthenticatedOptimizeRoute: typeof AuthenticatedOptimizeRoute
+  AuthenticatedPlantRoute: typeof AuthenticatedPlantRoute
+  AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
+  AuthenticatedQuotesRoute: typeof AuthenticatedQuotesRoute
+  AuthenticatedRevenueRoute: typeof AuthenticatedRevenueRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedBillRoute: AuthenticatedBillRoute,
+  AuthenticatedChannelsRoute: AuthenticatedChannelsRoute,
+  AuthenticatedDesignRoute: AuthenticatedDesignRoute,
+  AuthenticatedFinancingRoute: AuthenticatedFinancingRoute,
+  AuthenticatedHomeRoute: AuthenticatedHomeRoute,
+  AuthenticatedOptimizeRoute: AuthenticatedOptimizeRoute,
+  AuthenticatedPlantRoute: AuthenticatedPlantRoute,
+  AuthenticatedProfileRoute: AuthenticatedProfileRoute,
+  AuthenticatedQuotesRoute: AuthenticatedQuotesRoute,
+  AuthenticatedRevenueRoute: AuthenticatedRevenueRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
