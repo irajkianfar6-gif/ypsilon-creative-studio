@@ -94,7 +94,7 @@ function Maintenance() {
         ) : (
           orders.map((o) => {
             const k = KINDS[o.kind as Kind] ?? KINDS.inspection;
-            const s = STATUS[o.status] ?? STATUS.requested!;
+            const s = STATUS[o.status] ?? STATUS["requested"]!;
             const Icon = k.icon;
             return (
               <div key={o.id} className="flex items-start gap-3 rounded-3xl bg-card p-4 shadow-soft">
