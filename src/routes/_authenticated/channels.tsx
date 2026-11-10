@@ -54,7 +54,7 @@ function Channels() {
     setBusy(true);
     const { error } = await supabase.from("plants").update({ channel: sel.channel }).eq("id", plant!.id);
     setBusy(false);
-    if (error) return toast.error("ذخیره کانال انجام نشد");
+    if (error) { toast.error("ذخیره کانال انجام نشد"); return; }
     await qc.invalidateQueries({ queryKey: ["plant"] });
     navigate({ to: "/financing" });
   }

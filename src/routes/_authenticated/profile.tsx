@@ -29,12 +29,12 @@ function Profile() {
     const { data: u } = await supabase.auth.getUser();
     if (!u.user) return;
     if (phone && !/^0?9\d{9}$/.test(phone.replace(/[۰-۹]/g, (d) => String("۰۱۲۳۴۵۶۷۸۹".indexOf(d))))) {
-      return toast.error("شماره موبایل را درست وارد کنید (مثلاً ۰۹۱۲۳۴۵۶۷۸۹)");
+      { toast.error("شماره موبایل را درست وارد کنید (مثلاً ۰۹۱۲۳۴۵۶۷۸۹)"); return; }
     }
     setBusy(true);
     const { error } = await supabase.from("profiles").upsert({ id: u.user.id, full_name: name, phone, city });
     setBusy(false);
-    if (error) return toast.error("ذخیره انجام نشد");
+    if (error) { toast.error("ذخیره انجام نشد"); return; }
     await qc.invalidateQueries({ queryKey: ["profile"] });
     toast.success("اطلاعات ذخیره شد");
   }
@@ -48,7 +48,7 @@ function Profile() {
 
   return (
     <>
-      <ScreenHeader title="پروفایل" subtitle={data?.email} back={false} />
+      <ScreenHeader title="پروفایل" subtitle={data?.email ?? ""} back={false} />
       <div className="space-y-3 px-5 pb-6">
         <Link to="/bill" className="ink-card flex items-center gap-3 p-4 shadow-soft">
           <ReceiptText className="h-5 w-5" />

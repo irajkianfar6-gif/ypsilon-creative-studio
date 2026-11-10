@@ -64,7 +64,7 @@ function Revenue() {
     setBusy(true);
     const { error } = await supabase.from("settlements").update({ status, dispute_note: dispute_note ?? null }).eq("id", s!.id);
     setBusy(false);
-    if (error) return toast.error("ثبت انجام نشد");
+    if (error) { toast.error("ثبت انجام نشد"); return; }
     await qc.invalidateQueries({ queryKey: ["settlements"] });
     toast.success(status === "confirmed" ? "دریافت وجه تأیید شد" : "گزارش مغایرت ثبت شد؛ کارشناس بررسی می‌کند");
     setDispute(false);

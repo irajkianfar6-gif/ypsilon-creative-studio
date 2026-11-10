@@ -58,7 +58,7 @@ function Financing() {
       .update({ loan_amount_rial: loan, loan_months: loan > 0 ? term : 0 })
       .eq("id", plant!.id);
     setBusy(false);
-    if (error) return toast.error("ذخیره انجام نشد");
+    if (error) { toast.error("ذخیره انجام نشد"); return; }
     await qc.invalidateQueries({ queryKey: ["plant"] });
     navigate({ to: "/quotes" });
   }
@@ -78,7 +78,7 @@ function Financing() {
             <span className="text-muted-foreground">مبلغ وام</span>
             <span className="num font-extrabold">{moneyText(principal)}</span>
           </div>
-          <Slider dir="rtl" min={0} max={Math.max(5e9, estimate)} step={1e8} value={[principal]} onValueChange={([v]) => setPrincipal(v)} aria-label="مبلغ وام" />
+          <Slider dir="rtl" min={0} max={Math.max(5e9, estimate)} step={1e8} value={[principal]} onValueChange={([v]) => setPrincipal(v ?? 0)} aria-label="مبلغ وام" />
           <div className="flex gap-2">
             {TERMS.map((t) => (
               <button key={t} type="button" onClick={() => setMonths(t)} className={cn("flex-1 rounded-full py-2 text-xs font-bold", months === t ? "bg-ink text-ink-foreground" : "bg-muted")}>

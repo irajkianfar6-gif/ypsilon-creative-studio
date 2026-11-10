@@ -35,7 +35,7 @@ function Optimize() {
     );
   }
 
-  const pct = PEAK_PLANS[plan];
+  const pct: number = PEAK_PLANS[plan] ?? 28;
   const shifted = LOAD.map((v, h) => (h >= 12 && h <= 17 ? v * (1 - pct / 100) : h >= 20 || h <= 6 ? v * (1 + pct / 300) : v));
 
   return (

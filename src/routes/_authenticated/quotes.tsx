@@ -49,7 +49,7 @@ function Quotes() {
       .update({ supplier: offer.id, quote_rial: offer.price, stage: Math.max(plant!.stage, 1) })
       .eq("id", plant!.id);
     setBusy(false);
-    if (error) return toast.error("ثبت سفارش انجام نشد");
+    if (error) { toast.error("ثبت سفارش انجام نشد"); return; }
     await qc.invalidateQueries({ queryKey: ["plant"] });
     toast.success("سفارش ثبت شد و پرونده نیروگاه تشکیل شد");
     navigate({ to: "/plant" });

@@ -84,7 +84,7 @@ function Home() {
           <AreaCurve
             points={view.curve.map((c) => c.kw)}
             marker={view.idx}
-            markerLabel={`${fa(view.curve[view.idx].kw, 1)} kW`}
+            markerLabel={`${fa(view.curve[view.idx]?.kw ?? 0, 1)} kW`}
             xLabels={["۶ صبح", "۱۲ ظهر", "۶ عصر"]}
           />
           <p className="mt-1 text-center text-[11px] text-muted-foreground">اوج تولید {fa(view.peak, 1)} کیلووات</p>

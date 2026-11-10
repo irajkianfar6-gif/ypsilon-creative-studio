@@ -48,9 +48,9 @@ function BillPage() {
       offpeak_kwh: toNumber(values.offpeak_kwh || "0"),
       amount_rial: toNumber(values.amount_rial || "0"),
     };
-    if (Object.values(nums).some((n) => Number.isNaN(n) || n < 0)) return toast.error("مقادیر عددی را درست وارد کنید");
-    if (nums.peak_kwh + nums.mid_kwh + nums.offpeak_kwh <= 0) return toast.error("حداقل یکی از مصرف‌ها باید بیشتر از صفر باشد");
-    if (!values.bill_number.trim() || !values.period_label.trim()) return toast.error("شناسه قبض و دوره را وارد کنید");
+    if (Object.values(nums).some((n) => Number.isNaN(n) || n < 0)) { toast.error("مقادیر عددی را درست وارد کنید"); return; }
+    if (nums.peak_kwh + nums.mid_kwh + nums.offpeak_kwh <= 0) { toast.error("حداقل یکی از مصرف‌ها باید بیشتر از صفر باشد"); return; }
+    if (!values.bill_number.trim() || !values.period_label.trim()) { toast.error("شناسه قبض و دوره را وارد کنید"); return; }
 
     setBusy(true);
     try {

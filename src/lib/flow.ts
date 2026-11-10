@@ -25,7 +25,7 @@ export async function issueSettlement(plant: Plant, rate: Rate) {
   const { year, month } = shamsiParts();
   const prev = (month + 11) % 12;
   const prevYear = month === 0 ? year - 1 : year;
-  const energy = Math.round(Number(plant.annual_kwh) * MONTH_FACTORS[prev]);
+  const energy = Math.round(Number(plant.annual_kwh) * (MONTH_FACTORS[prev] ?? 0));
   const inverter = Math.round(energy * 1.023);
   const { error } = await supabase.from("settlements").insert({
     user_id: plant.user_id,

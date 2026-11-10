@@ -56,7 +56,7 @@ export function monthlyProduction(annualKwh: number) {
 }
 
 export function dailyProduction(annualKwh: number, monthIndex: number) {
-  return (annualKwh * MONTH_FACTORS[monthIndex]) / 30;
+  return (annualKwh * (MONTH_FACTORS[monthIndex] ?? 0)) / 30;
 }
 
 /** Bell-shaped output from 6:00 to 18:00 whose area equals the day's kWh. */

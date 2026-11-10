@@ -21,9 +21,9 @@ export function ScreenHeader({
   leading,
 }: {
   title: string;
-  subtitle?: string;
+  subtitle?: string | undefined;
   back?: boolean;
-  leading?: ReactNode;
+  leading?: ReactNode | undefined;
 }) {
   const router = useRouter();
   return (

@@ -73,7 +73,7 @@ export function AreaCurve({
   const line = xy.map(([x, y], i) => `${i === 0 ? "M" : "L"}${x.toFixed(1)},${y.toFixed(1)}`).join(" ");
   const area = `${line} L0,${h - 14} L${w},${h - 14} Z`;
   const m = marker !== undefined ? xy[Math.min(points.length - 1, Math.max(0, marker))] : undefined;
-  const peak = xy[points.indexOf(max)];
+  const peak = xy[points.indexOf(max)] ?? ([0, 0] as const);
   return (
     <div>
       <svg viewBox={`0 0 ${w} ${h}`} className="w-full" role="img" aria-label="نمودار تولید">

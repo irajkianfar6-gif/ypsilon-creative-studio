@@ -54,7 +54,7 @@ function AuthPage() {
 
   async function submit(e: FormEvent) {
     e.preventDefault();
-    if (!agree) return toast.error("برای ادامه، شرایط و رضایت‌نامه را بپذیرید");
+    if (!agree) { toast.error("برای ادامه، شرایط و رضایت‌نامه را بپذیرید"); return; }
     setBusy(true);
     try {
       if (mode === "in") {
@@ -83,7 +83,7 @@ function AuthPage() {
 
   async function google() {
     const result = await lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin });
-    if (result.error) return toast.error("ورود با گوگل انجام نشد");
+    if (result.error) { toast.error("ورود با گوگل انجام نشد"); return; }
     if (result.redirected) return;
     navigate({ to: "/home", replace: true });
   }

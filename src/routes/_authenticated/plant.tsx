@@ -42,6 +42,7 @@ function PlantFile() {
   const done = plant.stage;
   const operational = done >= OPERATIONAL_STAGE;
   const installDone = done >= 5 ? INSTALL.length : done === 4 ? 2 : 0;
+  const current = PERMIT_STAGES[Math.min(done, PERMIT_STAGES.length - 1)]!;
 
   async function advance() {
     if (!plant || operational) return;
@@ -55,7 +56,7 @@ function PlantFile() {
         if (rate) await issueSettlement({ ...plant, stage: next }, rate);
         toast.success("نیروگاه شما به بهره‌برداری رسید! اولین صورتحساب صادر شد");
       } else {
-        toast.success(`مرحله «${PERMIT_STAGES[plant.stage].title}» تکمیل شد`);
+        toast.success(`مرحله «${PERMIT_STAGES[plant.stage]?.title ?? ""}» تکمیل شد`);
       }
       await qc.invalidateQueries({ queryKey: ["plant"] });
       await qc.invalidateQueries({ queryKey: ["settlements"] });
@@ -76,7 +77,7 @@ function PlantFile() {
             <span className="num text-5xl font-black">{fa(Math.min(done + 1, PERMIT_STAGES.length))}</span>
             <span className="text-sm text-muted-foreground">از {fa(PERMIT_STAGES.length)}</span>
           </p>
-          {operational ? <Pill tone="success">● در حال بهره‌برداری</Pill> : <Pill tone="warning">● در انتظار {PERMIT_STAGES[done].title}</Pill>}
+          {operational ? <Pill tone="success">● در حال بهره‌برداری</Pill> : <Pill tone="warning">● در انتظار {current.title}</Pill>}
         </div>
 
         <ol className="mt-5 space-y-0">
@@ -129,8 +130,8 @@ function PlantFile() {
               <Clock className="h-5 w-5" />
             </span>
             <span className="flex-1">
-              <span className="block text-sm font-extrabold">{PERMIT_STAGES[done].title}</span>
-              <span className="block text-[11px] text-muted-foreground">{PERMIT_STAGES[done].note}</span>
+              <span className="block text-sm font-extrabold">{current.title}</span>
+              <span className="block text-[11px] text-muted-foreground">{current.note}</span>
             </span>
           </div>
         )}
