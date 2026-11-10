@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { plantQuery, ratesQuery } from "@/lib/queries";
 import { issueSettlement, nextStep, rateFor } from "@/lib/flow";
 import { OPERATIONAL_STAGE, PERMIT_STAGES } from "@/lib/solar";
-import { fa } from "@/lib/format";
+import { fa, faDigits } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/_authenticated/plant")({
@@ -69,7 +69,7 @@ function PlantFile() {
 
   return (
     <>
-      <ScreenHeader title="پرونده نیروگاه" subtitle={`کد رهگیری مهرسان ${plant.tracking_code}`} back={false} />
+      <ScreenHeader title="پرونده نیروگاه" subtitle={`کد رهگیری مهرسان ${faDigits(plant.tracking_code)}`} back={false} />
       <div className="px-5">
         <p className="text-xs text-muted-foreground">مرحله جاری</p>
         <div className="mt-1 flex items-end justify-between">

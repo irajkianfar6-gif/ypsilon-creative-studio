@@ -57,3 +57,7 @@ export function toNumber(input: string) {
   const n = Number(ascii);
   return Number.isFinite(n) ? n : NaN;
 }
+
+export function faDigits(s: string) {
+  return s.replace(/\d/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[Number(d)] ?? d);
+}
