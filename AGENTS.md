@@ -28,3 +28,9 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- Persian RTL, mobile-first: every page renders inside `PhoneShell` (root) using `src/components/eco/screen.tsx` primitives — keeps all screens visually consistent with the design.
+- Tariffs/contract terms come only from the versioned `rate_table`, never hard-coded — Regulation-as-Configuration (C-03).
+- Sizing/finance formulas live in `src/lib/solar.ts` with tests in `src/test/solar.test.ts` — one source of truth for numbers shown across screens.
+- User data (bills, plants, settlements) is read/written from the browser client under owner-only RLS; journey order is derived by `nextStep()` in `src/lib/flow.ts`.

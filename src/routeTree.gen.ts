@@ -15,8 +15,13 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedBillRouteImport } from './routes/_authenticated/bill'
 import { Route as AuthenticatedChannelsRouteImport } from './routes/_authenticated/channels'
 import { Route as AuthenticatedDesignRouteImport } from './routes/_authenticated/design'
+import { Route as AuthenticatedFinancingRouteImport } from './routes/_authenticated/financing'
 import { Route as AuthenticatedHomeRouteImport } from './routes/_authenticated/home'
 import { Route as AuthenticatedOptimizeRouteImport } from './routes/_authenticated/optimize'
+import { Route as AuthenticatedPlantRouteImport } from './routes/_authenticated/plant'
+import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
+import { Route as AuthenticatedQuotesRouteImport } from './routes/_authenticated/quotes'
+import { Route as AuthenticatedRevenueRouteImport } from './routes/_authenticated/revenue'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -47,6 +52,11 @@ const AuthenticatedDesignRoute = AuthenticatedDesignRouteImport.update({
   path: '/design',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedFinancingRoute = AuthenticatedFinancingRouteImport.update({
+  id: '/financing',
+  path: '/financing',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedHomeRoute = AuthenticatedHomeRouteImport.update({
   id: '/home',
   path: '/home',
@@ -57,6 +67,26 @@ const AuthenticatedOptimizeRoute = AuthenticatedOptimizeRouteImport.update({
   path: '/optimize',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedPlantRoute = AuthenticatedPlantRouteImport.update({
+  id: '/plant',
+  path: '/plant',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedQuotesRoute = AuthenticatedQuotesRouteImport.update({
+  id: '/quotes',
+  path: '/quotes',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedRevenueRoute = AuthenticatedRevenueRouteImport.update({
+  id: '/revenue',
+  path: '/revenue',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -64,8 +94,13 @@ export interface FileRoutesByFullPath {
   '/bill': typeof AuthenticatedBillRoute
   '/channels': typeof AuthenticatedChannelsRoute
   '/design': typeof AuthenticatedDesignRoute
+  '/financing': typeof AuthenticatedFinancingRoute
   '/home': typeof AuthenticatedHomeRoute
   '/optimize': typeof AuthenticatedOptimizeRoute
+  '/plant': typeof AuthenticatedPlantRoute
+  '/profile': typeof AuthenticatedProfileRoute
+  '/quotes': typeof AuthenticatedQuotesRoute
+  '/revenue': typeof AuthenticatedRevenueRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -73,8 +108,13 @@ export interface FileRoutesByTo {
   '/bill': typeof AuthenticatedBillRoute
   '/channels': typeof AuthenticatedChannelsRoute
   '/design': typeof AuthenticatedDesignRoute
+  '/financing': typeof AuthenticatedFinancingRoute
   '/home': typeof AuthenticatedHomeRoute
   '/optimize': typeof AuthenticatedOptimizeRoute
+  '/plant': typeof AuthenticatedPlantRoute
+  '/profile': typeof AuthenticatedProfileRoute
+  '/quotes': typeof AuthenticatedQuotesRoute
+  '/revenue': typeof AuthenticatedRevenueRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -84,15 +124,43 @@ export interface FileRoutesById {
   '/_authenticated/bill': typeof AuthenticatedBillRoute
   '/_authenticated/channels': typeof AuthenticatedChannelsRoute
   '/_authenticated/design': typeof AuthenticatedDesignRoute
+  '/_authenticated/financing': typeof AuthenticatedFinancingRoute
   '/_authenticated/home': typeof AuthenticatedHomeRoute
   '/_authenticated/optimize': typeof AuthenticatedOptimizeRoute
+  '/_authenticated/plant': typeof AuthenticatedPlantRoute
+  '/_authenticated/profile': typeof AuthenticatedProfileRoute
+  '/_authenticated/quotes': typeof AuthenticatedQuotesRoute
+  '/_authenticated/revenue': typeof AuthenticatedRevenueRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/auth' | '/bill' | '/channels' | '/design' | '/home' | '/optimize'
+    | '/'
+    | '/auth'
+    | '/bill'
+    | '/channels'
+    | '/design'
+    | '/financing'
+    | '/home'
+    | '/optimize'
+    | '/plant'
+    | '/profile'
+    | '/quotes'
+    | '/revenue'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/bill' | '/channels' | '/design' | '/home' | '/optimize'
+  to:
+    | '/'
+    | '/auth'
+    | '/bill'
+    | '/channels'
+    | '/design'
+    | '/financing'
+    | '/home'
+    | '/optimize'
+    | '/plant'
+    | '/profile'
+    | '/quotes'
+    | '/revenue'
   id:
     | '__root__'
     | '/'
@@ -101,8 +169,13 @@ export interface FileRouteTypes {
     | '/_authenticated/bill'
     | '/_authenticated/channels'
     | '/_authenticated/design'
+    | '/_authenticated/financing'
     | '/_authenticated/home'
     | '/_authenticated/optimize'
+    | '/_authenticated/plant'
+    | '/_authenticated/profile'
+    | '/_authenticated/quotes'
+    | '/_authenticated/revenue'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -155,6 +228,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDesignRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/financing': {
+      id: '/_authenticated/financing'
+      path: '/financing'
+      fullPath: '/financing'
+      preLoaderRoute: typeof AuthenticatedFinancingRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/home': {
       id: '/_authenticated/home'
       path: '/home'
@@ -169,6 +249,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedOptimizeRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/plant': {
+      id: '/_authenticated/plant'
+      path: '/plant'
+      fullPath: '/plant'
+      preLoaderRoute: typeof AuthenticatedPlantRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/profile': {
+      id: '/_authenticated/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AuthenticatedProfileRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/quotes': {
+      id: '/_authenticated/quotes'
+      path: '/quotes'
+      fullPath: '/quotes'
+      preLoaderRoute: typeof AuthenticatedQuotesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/revenue': {
+      id: '/_authenticated/revenue'
+      path: '/revenue'
+      fullPath: '/revenue'
+      preLoaderRoute: typeof AuthenticatedRevenueRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -176,16 +284,26 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedBillRoute: typeof AuthenticatedBillRoute
   AuthenticatedChannelsRoute: typeof AuthenticatedChannelsRoute
   AuthenticatedDesignRoute: typeof AuthenticatedDesignRoute
+  AuthenticatedFinancingRoute: typeof AuthenticatedFinancingRoute
   AuthenticatedHomeRoute: typeof AuthenticatedHomeRoute
   AuthenticatedOptimizeRoute: typeof AuthenticatedOptimizeRoute
+  AuthenticatedPlantRoute: typeof AuthenticatedPlantRoute
+  AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
+  AuthenticatedQuotesRoute: typeof AuthenticatedQuotesRoute
+  AuthenticatedRevenueRoute: typeof AuthenticatedRevenueRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedBillRoute: AuthenticatedBillRoute,
   AuthenticatedChannelsRoute: AuthenticatedChannelsRoute,
   AuthenticatedDesignRoute: AuthenticatedDesignRoute,
+  AuthenticatedFinancingRoute: AuthenticatedFinancingRoute,
   AuthenticatedHomeRoute: AuthenticatedHomeRoute,
   AuthenticatedOptimizeRoute: AuthenticatedOptimizeRoute,
+  AuthenticatedPlantRoute: AuthenticatedPlantRoute,
+  AuthenticatedProfileRoute: AuthenticatedProfileRoute,
+  AuthenticatedQuotesRoute: AuthenticatedQuotesRoute,
+  AuthenticatedRevenueRoute: AuthenticatedRevenueRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
