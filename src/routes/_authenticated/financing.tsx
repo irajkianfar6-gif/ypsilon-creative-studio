@@ -125,7 +125,7 @@ function Financing() {
         </div>
       </div>
 
-      <SunPanel className="mt-6 space-y-3">
+      <SunPanel className="space-y-3">
         <PanelTitle hint="سه راهکار">چه کار کنم؟</PanelTitle>
         {ways.map((w, i) => (
           <button key={w.title} type="button" onClick={w.run} className="ink-card flex w-full items-center gap-3 p-3.5 text-right">

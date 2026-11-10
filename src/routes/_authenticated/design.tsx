@@ -124,7 +124,7 @@ function Design() {
         </div>
       </div>
 
-      <SunPanel className="mt-5 space-y-3 pb-3">
+      <SunPanel className="space-y-3 pb-3">
         <PanelTitle hint={<Info className="h-4 w-4" />}>مشخصات طرح</PanelTitle>
         <div>
           <InfoRow label="پنل" value={`${fa(panels)} عدد ${fa(PANEL_WATT)} وات`} />

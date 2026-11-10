@@ -74,7 +74,7 @@ function AuthPage() {
     } catch (err) {
       const msg = err instanceof Error ? err.message : "";
       toast.error(
-        msg.includes("Invalid login") ? "ایمیل یا رمز عبور درست نیست" : msg.includes("already") ? "این ایمیل قبلاً ثبت شده است" : "ورود انجام نشد. دوباره تلاش کنید",
+        msg.includes("Invalid login") ? "ایمیل یا رمز عبور درست نیست" : msg.includes("already") ? "این ایمیل قبلاً ثبت شده است" : msg.includes("invalid") ? "این ایمیل معتبر نیست" : "ورود انجام نشد. دوباره تلاش کنید",
       );
     } finally {
       setBusy(false);

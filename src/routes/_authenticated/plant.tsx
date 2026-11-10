@@ -111,7 +111,7 @@ function PlantFile() {
         </ol>
       </div>
 
-      <SunPanel className="mt-6 space-y-3 pb-3">
+      <SunPanel className="space-y-3 pb-3">
         <PanelTitle hint={`${fa(installDone)} از ${fa(INSTALL.length)}`}>مراحل نصب پیمانکار</PanelTitle>
         <div className="grid grid-cols-5 gap-1.5">
           {INSTALL.map((t, i) => (

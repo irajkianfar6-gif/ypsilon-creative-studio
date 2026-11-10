@@ -115,7 +115,7 @@ function Revenue() {
         )}
       </div>
 
-      <SunPanel className="mt-6 space-y-3 pb-3">
+      <SunPanel className="space-y-3 pb-3">
         <PanelTitle hint={<Pill tone="ink">{STATUS[s.status]?.label}</Pill>}>صورتحساب</PanelTitle>
         <div>
           <InfoRow label="مبنا انرژی" value={`${fa(energy)} kWh`} />

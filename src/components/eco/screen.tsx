@@ -57,10 +57,12 @@ export function ScreenHeader({
 }
 
 export function SunPanel({ children, className }: { children: ReactNode; className?: string }) {
+  // The spacer pushes the yellow sheet to the bottom when content is short.
   return (
-    <section className={cn("sun-panel mt-auto px-5 pt-6 pb-6 animate-rise", className)}>
-      {children}
-    </section>
+    <>
+      <div aria-hidden className="min-h-6 flex-1" />
+      <section className={cn("sun-panel px-5 pt-6 pb-6 animate-rise", className)}>{children}</section>
+    </>
   );
 }
 

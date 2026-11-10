@@ -103,7 +103,7 @@ function Channels() {
       </div>
 
       {sel && (
-        <SunPanel className="mt-5 space-y-3">
+        <SunPanel className="space-y-3">
           <PanelTitle hint={<Eye className="h-4 w-4" />}>جزئیات کانال منتخب</PanelTitle>
           <div>
             <InfoRow label="نرخ قرارداد" value={`${fa(Number(sel.rate_rial_per_kwh))} ریال بر kWh`} />

@@ -91,7 +91,7 @@ function Home() {
         </div>
       </div>
 
-      <SunPanel className="mt-6 space-y-3 pb-3">
+      <SunPanel className="space-y-3 pb-3">
         <PanelTitle hint={operational ? "مبنای صورتحساب: کنتور رسمی توزیع" : "برآورد بر اساس طراحی"}>جریان انرژی امروز</PanelTitle>
         <div>
           <InfoRow label="تولید اینورتر" value={`${fa(view.today, 1)} kWh`} />

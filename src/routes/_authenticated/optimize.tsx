@@ -66,7 +66,7 @@ function Optimize() {
         </div>
       </div>
 
-      <SunPanel className="mt-5 space-y-3">
+      <SunPanel className="space-y-3">
         <PanelTitle hint={<Info className="h-4 w-4" />}>چرا این پیشنهاد؟</PanelTitle>
         <div>
           <InfoRow label="ضریب حساسیت دمایی" value="۰٫۰۷ بر هر درجه" />
