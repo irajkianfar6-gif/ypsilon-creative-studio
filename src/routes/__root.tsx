@@ -47,12 +47,13 @@ function reloadForStaleChunk(message: string) {
 
 function ErrorComponent({ error, reset }: ErrorComponentProps) {
   const router = useRouter();
-  const stale = CHUNK_ERROR.test(error?.message ?? "");
+  const message = error instanceof Error ? error.message : String(error ?? "");
+  const stale = CHUNK_ERROR.test(message);
   useEffect(() => {
-    if (reloadForStaleChunk(error?.message ?? "")) return;
+    if (reloadForStaleChunk(message)) return;
     console.error(error);
     reportLovableError(error, { boundary: "tanstack_root_error_component" });
-  }, [error]);
+  }, [error, message]);
 
   if (stale) {
     return (
