@@ -108,6 +108,16 @@ export function amortizationSchedule(principal: number, annualRate: number, mont
 /** Days in each Persian month (Esfand taken as 29). */
 export const MONTH_DAYS = [31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29];
 
+/**
+ * Pilot stand-in for inverter telemetry: the design's daily yield with a
+ * repeatable ±15% weather swing per day. Replaced once real devices report.
+ */
+export function simulatedDayKwh(annualKwh: number, monthIndex: number, day: number) {
+  const x = Math.sin((monthIndex + 1) * 97.13 + day * 12.9898) * 43758.5453;
+  const swing = 0.85 + 0.3 * (x - Math.floor(x));
+  return dailyProduction(annualKwh, monthIndex) * swing;
+}
+
 /** Share of meter-vs-inverter gap tolerated before an invoice is flagged. */
 export const RECONCILE_TOLERANCE = 0.03;
 
