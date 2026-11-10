@@ -34,3 +34,4 @@ use the editor.
 - Tariffs/contract terms come only from the versioned `rate_table`, never hard-coded — Regulation-as-Configuration (C-03).
 - Sizing/finance formulas live in `src/lib/solar.ts` with tests in `src/test/solar.test.ts` — one source of truth for numbers shown across screens.
 - User data (bills, plants, settlements) is read/written from the browser client under owner-only RLS; journey order is derived by `nextStep()` in `src/lib/flow.ts`.
+- AI calls go through `@lovable.dev/ai-gateway` inside authenticated `createServerFn` handlers (e.g. `src/lib/bill-ocr.functions.ts`), SDK imported inside the handler — keeps prompts and keys server-side; AI output is never saved without user confirmation.
