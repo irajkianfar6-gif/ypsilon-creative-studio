@@ -50,16 +50,77 @@ export type Database = {
         }
         Relationships: []
       }
+      consents: {
+        Row: {
+          granted_at: string
+          id: string
+          partner: string
+          revoked_at: string | null
+          user_id: string
+        }
+        Insert: {
+          granted_at?: string
+          id?: string
+          partner: string
+          revoked_at?: string | null
+          user_id: string
+        }
+        Update: {
+          granted_at?: string
+          id?: string
+          partner?: string
+          revoked_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      notifications: {
+        Row: {
+          body: string | null
+          created_at: string
+          id: string
+          kind: string
+          link: string | null
+          read_at: string | null
+          title: string
+          user_id: string
+        }
+        Insert: {
+          body?: string | null
+          created_at?: string
+          id?: string
+          kind?: string
+          link?: string | null
+          read_at?: string | null
+          title: string
+          user_id: string
+        }
+        Update: {
+          body?: string | null
+          created_at?: string
+          id?: string
+          kind?: string
+          link?: string | null
+          read_at?: string | null
+          title?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       plants: {
         Row: {
           annual_kwh: number
           capacity_kw: number
           channel: string | null
           city: string
+          contract_signed_at: string | null
+          contract_version: string | null
           created_at: string
+          dongle_id: string | null
           has_battery: boolean
           id: string
           inverter: string
+          inverter_serial: string | null
           loan_amount_rial: number | null
           loan_months: number | null
           name: string
@@ -79,10 +140,14 @@ export type Database = {
           capacity_kw: number
           channel?: string | null
           city?: string
+          contract_signed_at?: string | null
+          contract_version?: string | null
           created_at?: string
+          dongle_id?: string | null
           has_battery?: boolean
           id?: string
           inverter: string
+          inverter_serial?: string | null
           loan_amount_rial?: number | null
           loan_months?: number | null
           name?: string
@@ -102,10 +167,14 @@ export type Database = {
           capacity_kw?: number
           channel?: string | null
           city?: string
+          contract_signed_at?: string | null
+          contract_version?: string | null
           created_at?: string
+          dongle_id?: string | null
           has_battery?: boolean
           id?: string
           inverter?: string
+          inverter_serial?: string | null
           loan_amount_rial?: number | null
           loan_months?: number | null
           name?: string
@@ -124,26 +193,41 @@ export type Database = {
       }
       profiles: {
         Row: {
+          account_holder: string | null
+          birth_date: string | null
           city: string | null
           created_at: string
           full_name: string | null
+          iban: string | null
           id: string
+          kyc_submitted_at: string | null
+          national_id: string | null
           phone: string | null
           updated_at: string
         }
         Insert: {
+          account_holder?: string | null
+          birth_date?: string | null
           city?: string | null
           created_at?: string
           full_name?: string | null
+          iban?: string | null
           id: string
+          kyc_submitted_at?: string | null
+          national_id?: string | null
           phone?: string | null
           updated_at?: string
         }
         Update: {
+          account_holder?: string | null
+          birth_date?: string | null
           city?: string | null
           created_at?: string
           full_name?: string | null
+          iban?: string | null
           id?: string
+          kyc_submitted_at?: string | null
+          national_id?: string | null
           phone?: string | null
           updated_at?: string
         }
@@ -234,6 +318,126 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "settlements_plant_id_fkey"
+            columns: ["plant_id"]
+            isOneToOne: false
+            referencedRelation: "plants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      ticket_messages: {
+        Row: {
+          author: string
+          body: string
+          created_at: string
+          id: string
+          ticket_id: string
+          user_id: string
+        }
+        Insert: {
+          author?: string
+          body: string
+          created_at?: string
+          id?: string
+          ticket_id: string
+          user_id: string
+        }
+        Update: {
+          author?: string
+          body?: string
+          created_at?: string
+          id?: string
+          ticket_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ticket_messages_ticket_id_fkey"
+            columns: ["ticket_id"]
+            isOneToOne: false
+            referencedRelation: "tickets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tickets: {
+        Row: {
+          created_at: string
+          description: string
+          id: string
+          plant_id: string | null
+          status: string
+          subject: string
+          topic: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string
+          id?: string
+          plant_id?: string | null
+          status?: string
+          subject: string
+          topic: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          id?: string
+          plant_id?: string | null
+          status?: string
+          subject?: string
+          topic?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tickets_plant_id_fkey"
+            columns: ["plant_id"]
+            isOneToOne: false
+            referencedRelation: "plants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      work_orders: {
+        Row: {
+          created_at: string
+          id: string
+          kind: string
+          note: string | null
+          plant_id: string
+          preferred_date: string | null
+          status: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          kind: string
+          note?: string | null
+          plant_id: string
+          preferred_date?: string | null
+          status?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          kind?: string
+          note?: string | null
+          plant_id?: string
+          preferred_date?: string | null
+          status?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "work_orders_plant_id_fkey"
             columns: ["plant_id"]
             isOneToOne: false
             referencedRelation: "plants"

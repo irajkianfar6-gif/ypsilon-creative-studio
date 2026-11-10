@@ -77,6 +77,70 @@ export const profileQuery = queryOptions({
   },
 });
 
+export type Notice = Tables<"notifications">;
+export type Ticket = Tables<"tickets">;
+export type TicketMessage = Tables<"ticket_messages">;
+export type Consent = Tables<"consents">;
+export type WorkOrder = Tables<"work_orders">;
+
+export const notificationsQuery = queryOptions({
+  queryKey: ["notifications"],
+  queryFn: async () => {
+    const { data, error } = await supabase
+      .from("notifications")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .limit(100);
+    if (error) throw error;
+    return data;
+  },
+});
+
+export const ticketsQuery = queryOptions({
+  queryKey: ["tickets"],
+  queryFn: async () => {
+    const { data, error } = await supabase.from("tickets").select("*").order("updated_at", { ascending: false });
+    if (error) throw error;
+    return data;
+  },
+});
+
+export const ticketQuery = (id: string) =>
+  queryOptions({
+    queryKey: ["tickets", id],
+    queryFn: async () => {
+      const [t, m] = await Promise.all([
+        supabase.from("tickets").select("*").eq("id", id).maybeSingle(),
+        supabase.from("ticket_messages").select("*").eq("ticket_id", id).order("created_at"),
+      ]);
+      if (t.error) throw t.error;
+      if (m.error) throw m.error;
+      return { ticket: t.data, messages: m.data };
+    },
+  });
+
+export const consentsQuery = queryOptions({
+  queryKey: ["consents"],
+  queryFn: async () => {
+    const { data, error } = await supabase.from("consents").select("*");
+    if (error) throw error;
+    return data;
+  },
+});
+
+export const workOrdersQuery = queryOptions({
+  queryKey: ["work_orders"],
+  queryFn: async () => {
+    const { data, error } = await supabase.from("work_orders").select("*").order("created_at", { ascending: false });
+    if (error) throw error;
+    return data;
+  },
+});
+
+export function persianDate(iso: string, style: "medium" | "short" = "medium") {
+  return new Intl.DateTimeFormat("fa-IR-u-ca-persian", { dateStyle: style }).format(new Date(iso));
+}
+
 export async function currentUserId() {
   const { data } = await supabase.auth.getUser();
   if (!data.user) throw new Error("ابتدا وارد شوید");

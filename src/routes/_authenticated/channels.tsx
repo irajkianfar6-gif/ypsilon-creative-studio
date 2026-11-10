@@ -51,6 +51,11 @@ function Channels() {
 
   async function choose() {
     if (!sel || !sel.ok) return;
+    if (plant!.contract_signed_at) {
+      if (sel.channel !== plant!.channel) toast.error("قرارداد این کانال امضا شده و قفل است");
+      navigate({ to: "/contract" });
+      return;
+    }
     setBusy(true);
     const { error } = await supabase.from("plants").update({ channel: sel.channel }).eq("id", plant!.id);
     setBusy(false);

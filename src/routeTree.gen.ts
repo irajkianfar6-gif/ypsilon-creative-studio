@@ -14,9 +14,16 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedBillRouteImport } from './routes/_authenticated/bill'
 import { Route as AuthenticatedChannelsRouteImport } from './routes/_authenticated/channels'
+import { Route as AuthenticatedConsentsRouteImport } from './routes/_authenticated/consents'
+import { Route as AuthenticatedContractRouteImport } from './routes/_authenticated/contract'
 import { Route as AuthenticatedDesignRouteImport } from './routes/_authenticated/design'
 import { Route as AuthenticatedFinancingRouteImport } from './routes/_authenticated/financing'
 import { Route as AuthenticatedHomeRouteImport } from './routes/_authenticated/home'
+import { Route as AuthenticatedInstallmentsRouteImport } from './routes/_authenticated/installments'
+import { Route as AuthenticatedKycRouteImport } from './routes/_authenticated/kyc'
+import { Route as AuthenticatedMaintenanceRouteImport } from './routes/_authenticated/maintenance'
+import { Route as AuthenticatedMonitoringRouteImport } from './routes/_authenticated/monitoring'
+import { Route as AuthenticatedNotificationsRouteImport } from './routes/_authenticated/notifications'
 import { Route as AuthenticatedOptimizeRouteImport } from './routes/_authenticated/optimize'
 import { Route as AuthenticatedPlantRouteImport } from './routes/_authenticated/plant'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
@@ -47,6 +54,16 @@ const AuthenticatedChannelsRoute = AuthenticatedChannelsRouteImport.update({
   path: '/channels',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedConsentsRoute = AuthenticatedConsentsRouteImport.update({
+  id: '/consents',
+  path: '/consents',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedContractRoute = AuthenticatedContractRouteImport.update({
+  id: '/contract',
+  path: '/contract',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedDesignRoute = AuthenticatedDesignRouteImport.update({
   id: '/design',
   path: '/design',
@@ -62,6 +79,34 @@ const AuthenticatedHomeRoute = AuthenticatedHomeRouteImport.update({
   path: '/home',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedInstallmentsRoute =
+  AuthenticatedInstallmentsRouteImport.update({
+    id: '/installments',
+    path: '/installments',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedKycRoute = AuthenticatedKycRouteImport.update({
+  id: '/kyc',
+  path: '/kyc',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedMaintenanceRoute =
+  AuthenticatedMaintenanceRouteImport.update({
+    id: '/maintenance',
+    path: '/maintenance',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedMonitoringRoute = AuthenticatedMonitoringRouteImport.update({
+  id: '/monitoring',
+  path: '/monitoring',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedNotificationsRoute =
+  AuthenticatedNotificationsRouteImport.update({
+    id: '/notifications',
+    path: '/notifications',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedOptimizeRoute = AuthenticatedOptimizeRouteImport.update({
   id: '/optimize',
   path: '/optimize',
@@ -93,9 +138,16 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/bill': typeof AuthenticatedBillRoute
   '/channels': typeof AuthenticatedChannelsRoute
+  '/consents': typeof AuthenticatedConsentsRoute
+  '/contract': typeof AuthenticatedContractRoute
   '/design': typeof AuthenticatedDesignRoute
   '/financing': typeof AuthenticatedFinancingRoute
   '/home': typeof AuthenticatedHomeRoute
+  '/installments': typeof AuthenticatedInstallmentsRoute
+  '/kyc': typeof AuthenticatedKycRoute
+  '/maintenance': typeof AuthenticatedMaintenanceRoute
+  '/monitoring': typeof AuthenticatedMonitoringRoute
+  '/notifications': typeof AuthenticatedNotificationsRoute
   '/optimize': typeof AuthenticatedOptimizeRoute
   '/plant': typeof AuthenticatedPlantRoute
   '/profile': typeof AuthenticatedProfileRoute
@@ -107,9 +159,16 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/bill': typeof AuthenticatedBillRoute
   '/channels': typeof AuthenticatedChannelsRoute
+  '/consents': typeof AuthenticatedConsentsRoute
+  '/contract': typeof AuthenticatedContractRoute
   '/design': typeof AuthenticatedDesignRoute
   '/financing': typeof AuthenticatedFinancingRoute
   '/home': typeof AuthenticatedHomeRoute
+  '/installments': typeof AuthenticatedInstallmentsRoute
+  '/kyc': typeof AuthenticatedKycRoute
+  '/maintenance': typeof AuthenticatedMaintenanceRoute
+  '/monitoring': typeof AuthenticatedMonitoringRoute
+  '/notifications': typeof AuthenticatedNotificationsRoute
   '/optimize': typeof AuthenticatedOptimizeRoute
   '/plant': typeof AuthenticatedPlantRoute
   '/profile': typeof AuthenticatedProfileRoute
@@ -123,9 +182,16 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/_authenticated/bill': typeof AuthenticatedBillRoute
   '/_authenticated/channels': typeof AuthenticatedChannelsRoute
+  '/_authenticated/consents': typeof AuthenticatedConsentsRoute
+  '/_authenticated/contract': typeof AuthenticatedContractRoute
   '/_authenticated/design': typeof AuthenticatedDesignRoute
   '/_authenticated/financing': typeof AuthenticatedFinancingRoute
   '/_authenticated/home': typeof AuthenticatedHomeRoute
+  '/_authenticated/installments': typeof AuthenticatedInstallmentsRoute
+  '/_authenticated/kyc': typeof AuthenticatedKycRoute
+  '/_authenticated/maintenance': typeof AuthenticatedMaintenanceRoute
+  '/_authenticated/monitoring': typeof AuthenticatedMonitoringRoute
+  '/_authenticated/notifications': typeof AuthenticatedNotificationsRoute
   '/_authenticated/optimize': typeof AuthenticatedOptimizeRoute
   '/_authenticated/plant': typeof AuthenticatedPlantRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
@@ -139,9 +205,16 @@ export interface FileRouteTypes {
     | '/auth'
     | '/bill'
     | '/channels'
+    | '/consents'
+    | '/contract'
     | '/design'
     | '/financing'
     | '/home'
+    | '/installments'
+    | '/kyc'
+    | '/maintenance'
+    | '/monitoring'
+    | '/notifications'
     | '/optimize'
     | '/plant'
     | '/profile'
@@ -153,9 +226,16 @@ export interface FileRouteTypes {
     | '/auth'
     | '/bill'
     | '/channels'
+    | '/consents'
+    | '/contract'
     | '/design'
     | '/financing'
     | '/home'
+    | '/installments'
+    | '/kyc'
+    | '/maintenance'
+    | '/monitoring'
+    | '/notifications'
     | '/optimize'
     | '/plant'
     | '/profile'
@@ -168,9 +248,16 @@ export interface FileRouteTypes {
     | '/auth'
     | '/_authenticated/bill'
     | '/_authenticated/channels'
+    | '/_authenticated/consents'
+    | '/_authenticated/contract'
     | '/_authenticated/design'
     | '/_authenticated/financing'
     | '/_authenticated/home'
+    | '/_authenticated/installments'
+    | '/_authenticated/kyc'
+    | '/_authenticated/maintenance'
+    | '/_authenticated/monitoring'
+    | '/_authenticated/notifications'
     | '/_authenticated/optimize'
     | '/_authenticated/plant'
     | '/_authenticated/profile'
@@ -221,6 +308,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedChannelsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/consents': {
+      id: '/_authenticated/consents'
+      path: '/consents'
+      fullPath: '/consents'
+      preLoaderRoute: typeof AuthenticatedConsentsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/contract': {
+      id: '/_authenticated/contract'
+      path: '/contract'
+      fullPath: '/contract'
+      preLoaderRoute: typeof AuthenticatedContractRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/design': {
       id: '/_authenticated/design'
       path: '/design'
@@ -240,6 +341,41 @@ declare module '@tanstack/react-router' {
       path: '/home'
       fullPath: '/home'
       preLoaderRoute: typeof AuthenticatedHomeRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/installments': {
+      id: '/_authenticated/installments'
+      path: '/installments'
+      fullPath: '/installments'
+      preLoaderRoute: typeof AuthenticatedInstallmentsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/kyc': {
+      id: '/_authenticated/kyc'
+      path: '/kyc'
+      fullPath: '/kyc'
+      preLoaderRoute: typeof AuthenticatedKycRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/maintenance': {
+      id: '/_authenticated/maintenance'
+      path: '/maintenance'
+      fullPath: '/maintenance'
+      preLoaderRoute: typeof AuthenticatedMaintenanceRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/monitoring': {
+      id: '/_authenticated/monitoring'
+      path: '/monitoring'
+      fullPath: '/monitoring'
+      preLoaderRoute: typeof AuthenticatedMonitoringRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/notifications': {
+      id: '/_authenticated/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof AuthenticatedNotificationsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/optimize': {
@@ -283,9 +419,16 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedBillRoute: typeof AuthenticatedBillRoute
   AuthenticatedChannelsRoute: typeof AuthenticatedChannelsRoute
+  AuthenticatedConsentsRoute: typeof AuthenticatedConsentsRoute
+  AuthenticatedContractRoute: typeof AuthenticatedContractRoute
   AuthenticatedDesignRoute: typeof AuthenticatedDesignRoute
   AuthenticatedFinancingRoute: typeof AuthenticatedFinancingRoute
   AuthenticatedHomeRoute: typeof AuthenticatedHomeRoute
+  AuthenticatedInstallmentsRoute: typeof AuthenticatedInstallmentsRoute
+  AuthenticatedKycRoute: typeof AuthenticatedKycRoute
+  AuthenticatedMaintenanceRoute: typeof AuthenticatedMaintenanceRoute
+  AuthenticatedMonitoringRoute: typeof AuthenticatedMonitoringRoute
+  AuthenticatedNotificationsRoute: typeof AuthenticatedNotificationsRoute
   AuthenticatedOptimizeRoute: typeof AuthenticatedOptimizeRoute
   AuthenticatedPlantRoute: typeof AuthenticatedPlantRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
@@ -296,9 +439,16 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedBillRoute: AuthenticatedBillRoute,
   AuthenticatedChannelsRoute: AuthenticatedChannelsRoute,
+  AuthenticatedConsentsRoute: AuthenticatedConsentsRoute,
+  AuthenticatedContractRoute: AuthenticatedContractRoute,
   AuthenticatedDesignRoute: AuthenticatedDesignRoute,
   AuthenticatedFinancingRoute: AuthenticatedFinancingRoute,
   AuthenticatedHomeRoute: AuthenticatedHomeRoute,
+  AuthenticatedInstallmentsRoute: AuthenticatedInstallmentsRoute,
+  AuthenticatedKycRoute: AuthenticatedKycRoute,
+  AuthenticatedMaintenanceRoute: AuthenticatedMaintenanceRoute,
+  AuthenticatedMonitoringRoute: AuthenticatedMonitoringRoute,
+  AuthenticatedNotificationsRoute: AuthenticatedNotificationsRoute,
   AuthenticatedOptimizeRoute: AuthenticatedOptimizeRoute,
   AuthenticatedPlantRoute: AuthenticatedPlantRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,

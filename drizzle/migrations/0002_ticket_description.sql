@@ -1,0 +1,1 @@
+ALTER TABLE public.tickets ADD COLUMN description text NOT NULL DEFAULT '';

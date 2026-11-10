@@ -81,6 +81,46 @@ export function monthlyInstallment(principal: number, annualRate: number, months
   return (principal * r) / (1 - Math.pow(1 + r, -months));
 }
 
+export interface InstallmentRow {
+  n: number;
+  payment: number;
+  interest: number;
+  principal: number;
+  balance: number;
+}
+
+/** Month-by-month annuity schedule; the last row closes the balance exactly. */
+export function amortizationSchedule(principal: number, annualRate: number, months: number): InstallmentRow[] {
+  if (principal <= 0 || months <= 0) return [];
+  const pay = monthlyInstallment(principal, annualRate, months);
+  const r = annualRate / 12;
+  const rows: InstallmentRow[] = [];
+  let balance = principal;
+  for (let n = 1; n <= months; n++) {
+    const interest = balance * r;
+    const part = n === months ? balance : pay - interest;
+    balance = n === months ? 0 : balance - part;
+    rows.push({ n, payment: part + interest, interest, principal: part, balance: Math.max(0, balance) });
+  }
+  return rows;
+}
+
+/** Days in each Persian month (Esfand taken as 29). */
+export const MONTH_DAYS = [31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29];
+
+/**
+ * Pilot stand-in for inverter telemetry: the design's daily yield with a
+ * repeatable ±15% weather swing per day. Replaced once real devices report.
+ */
+export function simulatedDayKwh(annualKwh: number, monthIndex: number, day: number) {
+  const x = Math.sin((monthIndex + 1) * 97.13 + day * 12.9898) * 43758.5453;
+  const swing = 0.85 + 0.3 * (x - Math.floor(x));
+  return dailyProduction(annualKwh, monthIndex) * swing;
+}
+
+/** Share of meter-vs-inverter gap tolerated before an invoice is flagged. */
+export const RECONCILE_TOLERANCE = 0.03;
+
 /** Percent of the installment paid by plant revenue, capped at 100. */
 export function coveragePercent(monthlyRevenue: number, installment: number) {
   if (installment <= 0) return 100;

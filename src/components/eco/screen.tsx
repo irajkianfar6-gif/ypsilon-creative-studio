@@ -1,7 +1,9 @@
 import { Link, useRouter } from "@tanstack/react-router";
-import { Bell, ChevronRight, House, Sun, FileText, ChartColumn, User } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { Bell, ChevronLeft, ChevronRight, House, Sun, FileText, ChartColumn, User, type LucideIcon } from "lucide-react";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { notificationsQuery } from "@/lib/queries";
 
 /** Phone-sized frame: full screen on phones, a centred device on larger screens. */
 export function PhoneShell({ children }: { children: ReactNode }) {
@@ -47,14 +49,72 @@ export function ScreenHeader({
         {subtitle && <p className="truncate text-xs text-muted-foreground">{subtitle}</p>}
       </div>
       <div className="w-10">
-        <span className="relative flex h-10 w-10 items-center justify-center rounded-full bg-card shadow-soft">
-          <Bell className="h-5 w-5" />
-          <span className="absolute top-2 left-2.5 h-2 w-2 rounded-full bg-destructive" />
-        </span>
+        <NotificationBell />
       </div>
     </header>
   );
 }
+
+function NotificationBell() {
+  const { data } = useQuery({ ...notificationsQuery, staleTime: 30_000 });
+  const unread = data?.filter((n) => !n.read_at).length ?? 0;
+  return (
+    <Link
+      to="/notifications"
+      aria-label={unread ? `اعلان‌ها، ${unread} خوانده‌نشده` : "اعلان‌ها"}
+      className="relative flex h-10 w-10 items-center justify-center rounded-full bg-card shadow-soft"
+    >
+      <Bell className="h-5 w-5" />
+      {unread > 0 && (
+        <span className="num absolute -top-0.5 -left-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-destructive px-1 text-[9px] font-bold text-destructive-foreground">
+          {unread > 9 ? "۹+" : new Intl.NumberFormat("fa-IR").format(unread)}
+        </span>
+      )}
+    </Link>
+  );
+}
+
+/** Tappable row used on hub screens (plant file, profile). */
+export function LinkRow({
+  to,
+  icon: Icon,
+  title,
+  hint,
+  badge,
+}: {
+  to: LinkRowTarget;
+  icon: LucideIcon;
+  title: string;
+  hint?: string | undefined;
+  badge?: ReactNode;
+}) {
+  return (
+    <Link to={to} className="ink-card flex items-center gap-3 p-4 shadow-soft">
+      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary-soft">
+        <Icon className="h-5 w-5" />
+      </span>
+      <span className="min-w-0 flex-1">
+        <span className="block text-sm font-extrabold">{title}</span>
+        {hint && <span className="block truncate text-[11px] text-muted-foreground">{hint}</span>}
+      </span>
+      {badge}
+      <ChevronLeft className="h-4 w-4 shrink-0" />
+    </Link>
+  );
+}
+
+type LinkRowTarget =
+  | "/bill"
+  | "/optimize"
+  | "/kyc"
+  | "/consents"
+  | "/support"
+  | "/notifications"
+  | "/contract"
+  | "/monitoring"
+  | "/maintenance"
+  | "/installments"
+  | "/revenue";
 
 export function SunPanel({ children, className }: { children: ReactNode; className?: string }) {
   // The spacer pushes the yellow sheet to the bottom when content is short.
