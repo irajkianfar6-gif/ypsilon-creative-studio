@@ -43,11 +43,14 @@ function Kyc() {
 
   async function save(e: FormEvent) {
     e.preventDefault();
-    if (name.trim().length < 3) return toast.error("نام و نام خانوادگی را کامل وارد کنید");
-    if (!isValidNationalId(nid)) return toast.error("کد ملی معتبر نیست؛ ۱۰ رقم را دوباره بررسی کنید");
-    if (!birthOk) return toast.error("تاریخ تولد را به شکل ۱۳۶۵/۰۴/۱۲ وارد کنید");
-    if (!isValidIban(iban)) return toast.error("شماره شبا معتبر نیست؛ ۲۴ رقم بعد از IR را بررسی کنید");
-    if (holder.trim().length < 3) return toast.error("نام صاحب حساب را وارد کنید");
+    const problem =
+      name.trim().length < 3 ? "نام و نام خانوادگی را کامل وارد کنید"
+      : !isValidNationalId(nid) ? "کد ملی معتبر نیست؛ ۱۰ رقم را دوباره بررسی کنید"
+      : !birthOk ? "تاریخ تولد را به شکل ۱۳۶۵/۰۴/۱۲ وارد کنید"
+      : !isValidIban(iban) ? "شماره شبا معتبر نیست؛ ۲۴ رقم بعد از IR را بررسی کنید"
+      : holder.trim().length < 3 ? "نام صاحب حساب را وارد کنید"
+      : null;
+    if (problem) { toast.error(problem); return; }
     if (p?.iban && normalizeIban(iban) !== p.iban && !window.confirm("شبای مقصد واریز درآمد تغییر می‌کند. ادامه می‌دهید؟")) return;
     setBusy(true);
     const { data: u } = await supabase.auth.getUser();
