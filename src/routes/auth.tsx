@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { toast } from "sonner";
 import { MailCheck, ShieldCheck } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -52,7 +52,7 @@ function AuthPage() {
     });
   }, [navigate]);
 
-  async function submit(e: React.FormEvent) {
+  async function submit(e: FormEvent) {
     e.preventDefault();
     if (!agree) return toast.error("برای ادامه، شرایط و رضایت‌نامه را بپذیرید");
     setBusy(true);
