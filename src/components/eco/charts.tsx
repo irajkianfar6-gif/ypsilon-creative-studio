@@ -18,7 +18,7 @@ export function Bars({
   const max = Math.max(...values, 1);
   return (
     <div>
-      <div className="flex h-[--h] items-end gap-1.5" style={{ ["--h" as string]: `${height}px` }} dir="rtl">
+      <div className="flex items-end gap-1.5" style={{ height }} dir="rtl">
         {values.map((v, i) => {
           const h = Math.max(6, (v / max) * (height - 26));
           const hi = i === highlight;
