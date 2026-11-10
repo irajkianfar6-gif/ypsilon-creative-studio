@@ -8,7 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { PanelTitle, Pill, ScreenHeader, StepBar, SunPanel } from "@/components/eco/screen";
 import { Button } from "@/components/ui/button";
 import { billQuery, currentUserId } from "@/lib/queries";
-import { fa, faDigits, toNumber } from "@/lib/format";
+import { asciiDigits, fa, faDigits, toNumber } from "@/lib/format";
 import { photoToDataUrl } from "@/lib/image";
 import { extractBillFromImage, type BillExtraction, type BillField } from "@/lib/bill-ocr.functions";
 import { cn } from "@/lib/utils";
@@ -106,7 +106,7 @@ function BillPage() {
 
     setBusy(true);
     try {
-      const payload = { ...nums, bill_number: values.bill_number.trim(), period_label: values.period_label.trim() };
+      const payload = { ...nums, bill_number: asciiDigits(values.bill_number.trim()), period_label: values.period_label.trim() };
       const { error } = bill
         ? await supabase.from("bills").update(payload).eq("id", bill.id)
         : await supabase.from("bills").insert({ ...payload, user_id: await currentUserId() });
