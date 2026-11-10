@@ -15,6 +15,13 @@
       "when": 1794309922766,
       "tag": "0001_user_app_phase1_screens",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1794310043785,
+      "tag": "0002_ticket_description",
+      "breakpoints": true
     }
   ]
 }

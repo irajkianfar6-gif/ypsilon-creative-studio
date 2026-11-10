@@ -363,6 +363,7 @@ export type Database = {
       tickets: {
         Row: {
           created_at: string
+          description: string
           id: string
           plant_id: string | null
           status: string
@@ -373,6 +374,7 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          description?: string
           id?: string
           plant_id?: string | null
           status?: string
@@ -383,6 +385,7 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          description?: string
           id?: string
           plant_id?: string | null
           status?: string

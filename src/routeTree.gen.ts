@@ -17,6 +17,7 @@ import { Route as AuthenticatedChannelsRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedDesignRouteImport } from './routes/_authenticated/design'
 import { Route as AuthenticatedFinancingRouteImport } from './routes/_authenticated/financing'
 import { Route as AuthenticatedHomeRouteImport } from './routes/_authenticated/home'
+import { Route as AuthenticatedNotificationsRouteImport } from './routes/_authenticated/notifications'
 import { Route as AuthenticatedOptimizeRouteImport } from './routes/_authenticated/optimize'
 import { Route as AuthenticatedPlantRouteImport } from './routes/_authenticated/plant'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
@@ -62,6 +63,12 @@ const AuthenticatedHomeRoute = AuthenticatedHomeRouteImport.update({
   path: '/home',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedNotificationsRoute =
+  AuthenticatedNotificationsRouteImport.update({
+    id: '/notifications',
+    path: '/notifications',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedOptimizeRoute = AuthenticatedOptimizeRouteImport.update({
   id: '/optimize',
   path: '/optimize',
@@ -96,6 +103,7 @@ export interface FileRoutesByFullPath {
   '/design': typeof AuthenticatedDesignRoute
   '/financing': typeof AuthenticatedFinancingRoute
   '/home': typeof AuthenticatedHomeRoute
+  '/notifications': typeof AuthenticatedNotificationsRoute
   '/optimize': typeof AuthenticatedOptimizeRoute
   '/plant': typeof AuthenticatedPlantRoute
   '/profile': typeof AuthenticatedProfileRoute
@@ -110,6 +118,7 @@ export interface FileRoutesByTo {
   '/design': typeof AuthenticatedDesignRoute
   '/financing': typeof AuthenticatedFinancingRoute
   '/home': typeof AuthenticatedHomeRoute
+  '/notifications': typeof AuthenticatedNotificationsRoute
   '/optimize': typeof AuthenticatedOptimizeRoute
   '/plant': typeof AuthenticatedPlantRoute
   '/profile': typeof AuthenticatedProfileRoute
@@ -126,6 +135,7 @@ export interface FileRoutesById {
   '/_authenticated/design': typeof AuthenticatedDesignRoute
   '/_authenticated/financing': typeof AuthenticatedFinancingRoute
   '/_authenticated/home': typeof AuthenticatedHomeRoute
+  '/_authenticated/notifications': typeof AuthenticatedNotificationsRoute
   '/_authenticated/optimize': typeof AuthenticatedOptimizeRoute
   '/_authenticated/plant': typeof AuthenticatedPlantRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
@@ -142,6 +152,7 @@ export interface FileRouteTypes {
     | '/design'
     | '/financing'
     | '/home'
+    | '/notifications'
     | '/optimize'
     | '/plant'
     | '/profile'
@@ -156,6 +167,7 @@ export interface FileRouteTypes {
     | '/design'
     | '/financing'
     | '/home'
+    | '/notifications'
     | '/optimize'
     | '/plant'
     | '/profile'
@@ -171,6 +183,7 @@ export interface FileRouteTypes {
     | '/_authenticated/design'
     | '/_authenticated/financing'
     | '/_authenticated/home'
+    | '/_authenticated/notifications'
     | '/_authenticated/optimize'
     | '/_authenticated/plant'
     | '/_authenticated/profile'
@@ -242,6 +255,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedHomeRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/notifications': {
+      id: '/_authenticated/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof AuthenticatedNotificationsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/optimize': {
       id: '/_authenticated/optimize'
       path: '/optimize'
@@ -286,6 +306,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedDesignRoute: typeof AuthenticatedDesignRoute
   AuthenticatedFinancingRoute: typeof AuthenticatedFinancingRoute
   AuthenticatedHomeRoute: typeof AuthenticatedHomeRoute
+  AuthenticatedNotificationsRoute: typeof AuthenticatedNotificationsRoute
   AuthenticatedOptimizeRoute: typeof AuthenticatedOptimizeRoute
   AuthenticatedPlantRoute: typeof AuthenticatedPlantRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
@@ -299,6 +320,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDesignRoute: AuthenticatedDesignRoute,
   AuthenticatedFinancingRoute: AuthenticatedFinancingRoute,
   AuthenticatedHomeRoute: AuthenticatedHomeRoute,
+  AuthenticatedNotificationsRoute: AuthenticatedNotificationsRoute,
   AuthenticatedOptimizeRoute: AuthenticatedOptimizeRoute,
   AuthenticatedPlantRoute: AuthenticatedPlantRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
