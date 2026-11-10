@@ -43,12 +43,12 @@ function BillPage() {
   const [scan, setScan] = useState<BillExtraction | null>(null);
   const [edited, setEdited] = useState<Partial<Record<BillField, boolean>>>({});
   const [values, setValues] = useState<Record<BillField, string>>({
-    bill_number: bill?.bill_number ?? "",
+    bill_number: faDigits(bill?.bill_number ?? ""),
     period_label: bill?.period_label ?? "",
-    peak_kwh: bill ? String(bill.peak_kwh) : "",
-    mid_kwh: bill ? String(bill.mid_kwh) : "",
-    offpeak_kwh: bill ? String(bill.offpeak_kwh) : "",
-    amount_rial: bill ? String(bill.amount_rial) : "",
+    peak_kwh: bill ? fa(Number(bill.peak_kwh), 2) : "",
+    mid_kwh: bill ? fa(Number(bill.mid_kwh), 2) : "",
+    offpeak_kwh: bill ? fa(Number(bill.offpeak_kwh), 2) : "",
+    amount_rial: bill ? fa(Number(bill.amount_rial)) : "",
   });
 
   async function onPhoto(file: File | undefined) {
@@ -77,7 +77,7 @@ function BillPage() {
         for (const f of FIELDS) {
           const val = v[f.key];
           if (val !== null && val !== undefined && String(val).trim() !== "") {
-            next[f.key] = f.numeric ? String(val) : faDigits(String(val));
+            next[f.key] = f.numeric && typeof val === "number" ? fa(val, 2) : faDigits(String(val));
           }
         }
         return next;

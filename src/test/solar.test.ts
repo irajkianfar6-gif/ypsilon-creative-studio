@@ -61,3 +61,11 @@ describe("input parsing", () => {
     expect(toNumber("۱۸٬۲۵۰٬۰۰۰")).toBe(18_250_000);
   });
 });
+
+describe("bill numbers shown with Persian separators", () => {
+  it("round-trips a formatted amount back to a number", async () => {
+    const { fa } = await import("@/lib/format");
+    expect(toNumber(fa(18_250_000))).toBe(18_250_000);
+    expect(toNumber(fa(312.5, 2))).toBe(312.5);
+  });
+});
