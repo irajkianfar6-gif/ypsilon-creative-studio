@@ -31,12 +31,42 @@ function NotFoundComponent() {
   );
 }
 
+// After an update, an open tab can still point at page files that no longer exist.
+// Reload once to pick up the new version instead of showing a blank screen.
+const CHUNK_ERROR = /Failed to fetch dynamically imported module|Importing a module script failed|error loading dynamically imported module/i;
+const RELOAD_KEY = "eco-chunk-reload";
+
+function reloadForStaleChunk(message: string) {
+  if (typeof window === "undefined" || !CHUNK_ERROR.test(message)) return false;
+  const last = Number(sessionStorage.getItem(RELOAD_KEY) ?? 0);
+  if (Date.now() - last < 10_000) return false; // avoid reload loops
+  sessionStorage.setItem(RELOAD_KEY, String(Date.now()));
+  window.location.reload();
+  return true;
+}
+
 function ErrorComponent({ error, reset }: ErrorComponentProps) {
-  console.error(error);
   const router = useRouter();
+  const stale = CHUNK_ERROR.test(error?.message ?? "");
   useEffect(() => {
+    if (reloadForStaleChunk(error?.message ?? "")) return;
+    console.error(error);
     reportLovableError(error, { boundary: "tanstack_root_error_component" });
   }, [error]);
+
+  if (stale) {
+    return (
+      <PhoneShell>
+        <div className="flex flex-1 flex-col items-center justify-center px-6 text-center">
+          <h1 className="text-xl font-bold">نسخه تازه اپ آماده است</h1>
+          <p className="mt-2 text-sm text-muted-foreground">برای ادامه صفحه را دوباره بارگذاری کنید.</p>
+          <button onClick={() => window.location.reload()} className="mt-6 rounded-full bg-ink px-5 py-3 text-sm font-bold text-ink-foreground">
+            بارگذاری دوباره
+          </button>
+        </div>
+      </PhoneShell>
+    );
+  }
 
   return (
     <PhoneShell>
@@ -112,6 +142,23 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const router = useRouter();
+
+  useEffect(() => {
+    const onPreloadError = (e: Event) => {
+      const err = (e as Event & { payload?: unknown }).payload;
+      if (reloadForStaleChunk(err instanceof Error ? err.message : "Failed to fetch dynamically imported module")) e.preventDefault();
+    };
+    const onRejection = (e: PromiseRejectionEvent) => {
+      const msg = e.reason instanceof Error ? e.reason.message : String(e.reason ?? "");
+      if (reloadForStaleChunk(msg)) e.preventDefault();
+    };
+    window.addEventListener("vite:preloadError", onPreloadError);
+    window.addEventListener("unhandledrejection", onRejection);
+    return () => {
+      window.removeEventListener("vite:preloadError", onPreloadError);
+      window.removeEventListener("unhandledrejection", onRejection);
+    };
+  }, []);
 
   useEffect(() => {
     const { data } = supabase.auth.onAuthStateChange((event) => {
