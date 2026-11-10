@@ -83,7 +83,7 @@ function BillPage() {
         </div>
       </div>
 
-      <SunPanel className="flex-1">
+      <SunPanel>
         <form onSubmit={submit}>
           <PanelTitle>داده‌های قبض</PanelTitle>
           <p className="-mt-2 mb-3 text-xs opacity-75">هر مقدار را بررسی کنید؛ تحلیل مصرف و طراحی نیروگاه بر همین داده‌ها انجام می‌شود.</p>

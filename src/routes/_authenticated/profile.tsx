@@ -62,7 +62,7 @@ function Profile() {
         </Link>
       </div>
 
-      <SunPanel className="flex-1 space-y-3">
+      <SunPanel className="space-y-3">
         <PanelTitle>اطلاعات حساب</PanelTitle>
         <form onSubmit={save} className="space-y-3">
           <Input placeholder="نام و نام خانوادگی" value={name} onChange={(e) => setName(e.target.value)} className="h-12 rounded-2xl border-0 bg-card" />

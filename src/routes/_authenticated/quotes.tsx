@@ -72,7 +72,7 @@ function Quotes() {
         </div>
       </div>
 
-      <SunPanel className="flex-1 space-y-3">
+      <SunPanel className="space-y-3">
         <PanelTitle hint="اعتبار به دقیقه">مقایسه فهرست تجهیزات</PanelTitle>
         {offers.map((o) => (
           <button

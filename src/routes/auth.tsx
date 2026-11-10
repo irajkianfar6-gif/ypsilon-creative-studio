@@ -96,7 +96,7 @@ function AuthPage() {
         <p className="mt-1 text-sm text-muted-foreground">مدیریت هوشمند انرژی خورشیدی شما</p>
       </div>
 
-      <SunPanel className="flex-1 space-y-4">
+      <SunPanel className="space-y-4">
         {sent ? (
           <div className="ink-card space-y-3 p-6 text-center">
             <MailCheck className="mx-auto h-10 w-10 text-primary-deep" />
