@@ -14,7 +14,233 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      bills: {
+        Row: {
+          amount_rial: number
+          bill_number: string
+          created_at: string
+          id: string
+          mid_kwh: number
+          offpeak_kwh: number
+          peak_kwh: number
+          period_label: string
+          user_id: string
+        }
+        Insert: {
+          amount_rial?: number
+          bill_number: string
+          created_at?: string
+          id?: string
+          mid_kwh?: number
+          offpeak_kwh?: number
+          peak_kwh?: number
+          period_label: string
+          user_id: string
+        }
+        Update: {
+          amount_rial?: number
+          bill_number?: string
+          created_at?: string
+          id?: string
+          mid_kwh?: number
+          offpeak_kwh?: number
+          peak_kwh?: number
+          period_label?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      plants: {
+        Row: {
+          annual_kwh: number
+          capacity_kw: number
+          channel: string | null
+          city: string
+          created_at: string
+          has_battery: boolean
+          id: string
+          inverter: string
+          loan_amount_rial: number | null
+          loan_months: number | null
+          name: string
+          orientation: string
+          panel_count: number
+          panel_watt: number
+          quote_rial: number | null
+          roof_area_m2: number
+          stage: number
+          supplier: string | null
+          tracking_code: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          annual_kwh: number
+          capacity_kw: number
+          channel?: string | null
+          city?: string
+          created_at?: string
+          has_battery?: boolean
+          id?: string
+          inverter: string
+          loan_amount_rial?: number | null
+          loan_months?: number | null
+          name?: string
+          orientation?: string
+          panel_count: number
+          panel_watt?: number
+          quote_rial?: number | null
+          roof_area_m2: number
+          stage?: number
+          supplier?: string | null
+          tracking_code?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          annual_kwh?: number
+          capacity_kw?: number
+          channel?: string | null
+          city?: string
+          created_at?: string
+          has_battery?: boolean
+          id?: string
+          inverter?: string
+          loan_amount_rial?: number | null
+          loan_months?: number | null
+          name?: string
+          orientation?: string
+          panel_count?: number
+          panel_watt?: number
+          quote_rial?: number | null
+          roof_area_m2?: number
+          stage?: number
+          supplier?: string | null
+          tracking_code?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          city: string | null
+          created_at: string
+          full_name: string | null
+          id: string
+          phone: string | null
+          updated_at: string
+        }
+        Insert: {
+          city?: string | null
+          created_at?: string
+          full_name?: string | null
+          id: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Update: {
+          city?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      rate_table: {
+        Row: {
+          active: boolean
+          channel: string
+          condition: string | null
+          contract_years: number
+          created_at: string
+          id: string
+          rate_rial_per_kwh: number
+          settlement_delay: string | null
+          sort_order: number
+          title: string
+          version: string
+        }
+        Insert: {
+          active?: boolean
+          channel: string
+          condition?: string | null
+          contract_years: number
+          created_at?: string
+          id?: string
+          rate_rial_per_kwh: number
+          settlement_delay?: string | null
+          sort_order?: number
+          title: string
+          version: string
+        }
+        Update: {
+          active?: boolean
+          channel?: string
+          condition?: string | null
+          contract_years?: number
+          created_at?: string
+          id?: string
+          rate_rial_per_kwh?: number
+          settlement_delay?: string | null
+          sort_order?: number
+          title?: string
+          version?: string
+        }
+        Relationships: []
+      }
+      settlements: {
+        Row: {
+          amount_rial: number
+          created_at: string
+          dispute_note: string | null
+          energy_kwh: number
+          id: string
+          inverter_kwh: number
+          period_label: string
+          plant_id: string
+          rate_rial: number
+          status: string
+          user_id: string
+        }
+        Insert: {
+          amount_rial: number
+          created_at?: string
+          dispute_note?: string | null
+          energy_kwh: number
+          id?: string
+          inverter_kwh: number
+          period_label: string
+          plant_id: string
+          rate_rial: number
+          status?: string
+          user_id: string
+        }
+        Update: {
+          amount_rial?: number
+          created_at?: string
+          dispute_note?: string | null
+          energy_kwh?: number
+          id?: string
+          inverter_kwh?: number
+          period_label?: string
+          plant_id?: string
+          rate_rial?: number
+          status?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "settlements_plant_id_fkey"
+            columns: ["plant_id"]
+            isOneToOne: false
+            referencedRelation: "plants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
